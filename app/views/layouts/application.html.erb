@@ -1,0 +1,43 @@
+<html>
+<head>
+  <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/readable/bootstrap.min.css" rel="stylesheet">
+  <title>Final Project</title>
+</head>
+<body>
+  <div class="jumbotron">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <ul class="nav nav-tabs">
+        <li role="presentation"><%= link_to "Home", root_path %></li>
+      </ul>
+    </div>
+    
+    <% if current_user %>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" align="right">
+        Logged in as: <%= current_user.email %>
+        <%= button_to "Logout", destroy_user_session_path, {method: :delete } %>
+    </div>
+    <% else %>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" align="right">
+      <%= form_for :users, url: user_session_path do |f| %>
+        <div class="form-group">
+          <%= f.label :email %>
+          <%= f.email_field :email %>
+        </div>
+        <div class="form-group">
+          <%= f.label :password %>
+          <%= f.password_field :password %>
+        </div>
+       <%= f.submit "Login" %>
+      </form>
+      <% end %>
+    </div>
+    <% end %>
+  <h1>Welcome to here</h1>
+  </div>
+<div class="container">
+
+<%= yield %>
+</div>
+
+</body>
+</html>
