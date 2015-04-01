@@ -37,4 +37,31 @@ RSpec.describe User, type: :model do
     expect(Album.find(user1.favorites.first.album_id).artist).to eq "Courtney Barnett"
     expect(Album.find(user1.favorites.last.album_id).artist).to eq "Fleet Foxes"
   end
+
+  it "can't favorite the same album twice" do
+    user1 = FactoryGirl.create :user
+    album1 = FactoryGirl.create :album
+
+    album1.favorite user1
+    album1.favorite user1
+
+    expect(Favorite.count).to eq 1
+    expect(user1.favorites.count).to eq 1
+    expect(album1.favorites.count).to eq 1
+  end
+
+  it "can unfavorite an album" do
+    user1 = FactoryGirl.create :user
+    album1 = FactoryGirl.create :album
+    album2 = FactoryGirl.create :album
+
+    album1.favorite user1
+    album2.favorite user1
+    album1.unfavorite user1
+
+    expect(Favorite.count).to eq 1
+    expect(user1.favorites.count).to eq 1
+    expect(album1.favorites.count).to eq 0
+    expect(album2.favorites.count).to eq 1
+  end
 end

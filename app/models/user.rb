@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   serialize :google_auth_data, JSON
 
   def self.from_omniauth auth
-
+binding.pry
     email = auth.info.email
   
     where(email: email).first_or_create! do |u|
