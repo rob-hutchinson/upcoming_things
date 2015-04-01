@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   root "application#home"
 
   get "/albums/list" => "albums#list"
+  get "/albums/concerts" => "albums#concert"
 end
