@@ -8,20 +8,21 @@ class AlbumsController < ApplicationController
   def favorite
     album = Album.find params[:album_id].to_i
     album.favorite current_user
-    # redirect_to :back
     head :ok
   end
 
   def unfavorite
     album = Album.find params[:album_id].to_i
     album.unfavorite current_user
-    # redirect_to :back
     head :ok
   end
 
   def concert
-    concerts = Concert.new.search "The Decemberists", 30303
+    faves = current_user.favorites.pluck(:album_id)
+    artists = faves.map { |x| Album.find(x).artist }
     
+    concerts = Concert.new.search artists, 22201
+  
     unless concerts.empty?
       @concerts = concerts
     else

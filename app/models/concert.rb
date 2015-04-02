@@ -1,26 +1,37 @@
 class Concert
 
-  def search artist, zipcode
+  def search artists, zipcode
     concerts = []
-    artist_query = artist.split(" ").join("+")
-    
-    data = HTTParty.get("http://api.eventful.com/rest/events/search?category=music&
-    sort_order=date&location=#{zipcode}&within=25&date=future&page_size=100
-    &keywords=#{artist_query}", query: {"app_key"=> Figaro.env.eventful_key})
-    
-    if data["search"]["total_items"].to_i == 1
-      all_events = [] << data["search"]["events"]["event"]
-    elsif data["search"]["total_items"].to_i > 1
-      all_events = data["search"]["events"]["event"]
-    end
+    data = []
 
-    unless all_events.nil?
+    artist_query = artists.map { |x| x.split(" ").join("+") }
+    
+    artist_query.each do |x|
+      data << HTTParty.get("http://api.eventful.com/rest/events/search?category=music&
+      sort_order=date&location=#{zipcode}&within=25&date=future&page_size=100
+      &keywords=#{x}", query: {"app_key"=> Figaro.env.eventful_key})
+    end
+  
+    all_events = data.map {|x| if x["search"]["total_items"].to_i > 0 
+      then x["search"]["events"]["event"] end }.compact
+    
+    unless all_events.empty?
       all_events.each do |x|
-        if x["title"] == artist || x["title"] == "Matt and Kim"
-          concerts << x
+        binding.pry
+        if x.count == 42
+          if artists.include?(x["title"])
+            concerts << x
+          end
+        else
+          x.each do |y|
+            if artists.include?(y["title"])
+              concerts << y
+            end
+          end
         end
       end
     end
+
     concerts
   end
 
