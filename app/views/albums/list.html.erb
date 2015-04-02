@@ -1,4 +1,4 @@
-<table class="table table-striped table-hover ">
+<table class="table table-striped table-hover" id="favorite-album-table">
   <thead>
     <tr>
       <th>#</th>
@@ -18,10 +18,10 @@
         <td>
           <% if @favorites.include? x.id %>
             <%= form_tag unfavorite_album_path(x), method: :delete %>
-            <button class="btn btn-danger">Unfollow</button></form>
+            <button class="btn btn-danger" data-id=<%=x.id%> data-action="unfavorite">Unfollow</button></form>
           <% else %>
             <%= form_tag favorite_album_path(x), method: :post %>
-            <button class="btn btn-default">Follow</button></form>
+            <button class="btn btn-default" data-id=<%=x.id%> data-action="favorite">Follow</button></form>
           <% end %>
       </tr>
     <% end %>

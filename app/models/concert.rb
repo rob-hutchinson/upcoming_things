@@ -10,13 +10,15 @@ class Concert
     
     if data["search"]["total_items"].to_i == 1
       all_events = [] << data["search"]["events"]["event"]
-    else
+    elsif data["search"]["total_items"].to_i > 1
       all_events = data["search"]["events"]["event"]
     end
-      
-    all_events.each do |x|
-      if x["title"] == artist || x["title"] == "Matt and Kim"
-        concerts << x
+
+    unless all_events.nil?
+      all_events.each do |x|
+        if x["title"] == artist || x["title"] == "Matt and Kim"
+          concerts << x
+        end
       end
     end
     concerts
