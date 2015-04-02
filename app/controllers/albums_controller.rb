@@ -5,11 +5,13 @@ class AlbumsController < ApplicationController
   end
 
   def concert
-    concerts = Concert.new.search "Matt & Kim", 22201
+    concerts = Concert.new.search "The Mountain Goats", 22201
+    
     unless concerts.empty?
       @concerts = concerts
     else
       #flash message about no concerts and redirect
+    redirect_to root_path
     end
   end
 

@@ -8,19 +8,18 @@ class Concert
     sort_order=date&location=#{zipcode}&within=25&date=future&page_size=100
     &keywords=#{artist_query}", query: {"app_key"=> Figaro.env.eventful_key})
     
-    all_events = data["search"]["events"]["event"]
-
-    unless data.count < 2
-      all_events.each do |x|
-        if x["title"] == artist || x["title"] == "Matt and Kim"
-          concerts << x
-        end
-      end
+    if data["search"]["total_items"].to_i == 1
+      all_events = [] << data["search"]["events"]["event"]
     else
-      if all_events["title"] == artist
-        concerts << all_events
+      all_events = data["search"]["events"]["event"]
+    end
+      
+    all_events.each do |x|
+      if x["title"] == artist || x["title"] == "Matt and Kim"
+        concerts << x
       end
     end
     concerts
   end
+
 end
