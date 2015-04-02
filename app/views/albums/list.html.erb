@@ -5,6 +5,7 @@
       <th>Artist</th>
       <th>Album</th>
       <th>Release Date</th>
+      <th>Follow</th>
     </tr>
   </thead>
   <tbody>
@@ -14,6 +15,15 @@
         <td><%= x.artist %></td>
         <td><%= x.album_title %></td>
         <td><%= x.release_date %></td>
+        <td>
+          <% if @favorites.include? x.id %>
+            <%= form_tag unfavorite_album_path(x), method: :delete %>
+            <button class="btn btn-danger">Unfollow</button></form>
+          <% else %>
+            <%= form_tag favorite_album_path(x), method: :post %>
+            <button class="btn btn-default">Follow</button></form>
+          <% end %>
       </tr>
     <% end %>
 </table> 
+
