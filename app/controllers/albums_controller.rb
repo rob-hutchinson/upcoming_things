@@ -22,7 +22,7 @@ class AlbumsController < ApplicationController
     artists = faves.map { |x| Album.find(x).artist }
     
     concerts = Concert.new.search artists, 22201
-  
+
     unless concerts.empty?
       @concerts = concerts
     else

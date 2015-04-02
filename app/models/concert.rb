@@ -17,7 +17,6 @@ class Concert
     
     unless all_events.empty?
       all_events.each do |x|
-        binding.pry
         if x.count == 42
           if artists.include?(x["title"])
             concerts << x

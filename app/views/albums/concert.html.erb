@@ -12,7 +12,13 @@
   <tbody>
     <% @concerts.each do |x| %>
       <tr>
-        <td><img src= <%= x["image"]["medium"]["url"]%>></td>
+        <td>
+          <% unless x["image"].nil? %>
+          <img src= <%= x["image"]["medium"]["url"]%>>
+          <% else %>
+          <img src= "http://img2.wikia.nocookie.net/__cb20141105223610/r2d/images/7/73/Dogepic.png", length="128", width="128">
+          <% end %>
+        </td>
         <td><%= x["title"] %></td>
         <td><%= x["venue_name"] %></td>
         <td><%= Date.parse(x["start_time"]) %></td>
