@@ -11,12 +11,15 @@ class User < ActiveRecord::Base
   serialize :google_auth_data, JSON
 
   def self.from_omniauth auth
-binding.pry
+
     email = auth.info.email
   
     where(email: email).first_or_create! do |u|
       u.password = SecureRandom.hex 64
-      # u.google_auth_data = auth.to_h
+      u.user_token = auth["credentials"]["token"]
+      u.user_refresh_token = auth["credentials"]["refresh_token"]
+      u.token_refreshes_at = auth["credentials"]["expires_at"]
+      u.auth_data = auth
     end
 
   end

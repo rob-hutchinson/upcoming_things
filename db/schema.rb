@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150331192944) do
+ActiveRecord::Schema.define(version: 20150403162952) do
 
   create_table "albums", force: :cascade do |t|
     t.string   "artist",       null: false
@@ -45,6 +45,11 @@ ActiveRecord::Schema.define(version: 20150331192944) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "user_token"
+    t.string   "user_refresh_token"
+    t.text     "auth_data"
+    t.integer  "zip_code"
+    t.integer  "token_refreshes_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
