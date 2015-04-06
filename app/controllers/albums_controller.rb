@@ -14,6 +14,8 @@ class AlbumsController < ApplicationController
 
   def unfavorite
     album = Album.find params[:album_id].to_i
+    event_id = Favorite.find_by(user_id: current_user.id, album_id: album.id).id_code
+    Calendar.new.delete_event current_user, event_id
     album.unfavorite current_user
     head :ok
   end

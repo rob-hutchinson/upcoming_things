@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150403162952) do
+ActiveRecord::Schema.define(version: 20150406201418) do
 
   create_table "albums", force: :cascade do |t|
     t.string   "artist",       null: false
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20150403162952) do
     t.integer  "album_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "id_code"
   end
 
   add_index "favorites", ["album_id"], name: "index_favorites_on_album_id"
