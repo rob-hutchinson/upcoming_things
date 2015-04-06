@@ -53,7 +53,7 @@ require "pry"
       client.authorization.expires_in = 3600
       
       calendar = client.discovered_api('calendar', 'v3')
-       
+      id_code = Favorite.find_by(user_id: user.id, album_id: album.id).id_code
       # response = client.execute(
       #   api_method: calendar.events.list,
       #   parameters: { 'calendarId' => 'primary'},
@@ -66,7 +66,8 @@ require "pry"
         'summary' => "'#{album.album_title}' ~ #{album.artist} release date",
         'start' => {'date' => "#{album.release_date}"},
         'end' => {'date' => "#{album.release_date}"},
-        'description' => 'This CD Releases today!',
+        'description' => 'CD releases today!',
+        'id' => "#{id_code}"
         }
 
       result = client.execute(
@@ -76,7 +77,7 @@ require "pry"
             :headers => {'Content-Type' => 'application/json'})
     end
 
-    def delete_event user
+    def delete_event user, event_id
       client = Google::APIClient.new(
         application_name: "Demo Calendar Client",
         application_version: "0.0.1"
@@ -93,20 +94,9 @@ require "pry"
       client.authorization.expires_in = 3600
       
       calendar = client.discovered_api('calendar', 'v3')
-       
-      record = Album.find(49)
 
-      event = {
-        'summary' => "#{record.artist}'s CD release date",
-        'start' => {'date' => "#{record.release_date}"},
-        'end' => {'date' => "#{record.release_date}"},
-        'description' => 'This CD Releases today!',
-        }
-
-      result = client.execute(
-            :api_method => calendar.events.insert,
-            :parameters => {'calendarId' => 'primary'},
-            :body => JSON.dump(event),
-            :headers => {'Content-Type' => 'application/json'})
+     result = client.execute(
+            :api_method => calendar.events.delete,
+            :parameters => {'calendarId' => 'primary', 'eventId' => "#{event_id}"})
     end
   end

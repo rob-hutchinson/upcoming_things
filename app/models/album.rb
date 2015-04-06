@@ -4,7 +4,7 @@ class Album < ActiveRecord::Base
   has_many :users, through: :favorites
 
   def favorite user
-    self.favorites.create(user_id: user.id)
+    self.favorites.create(user_id: user.id, id_code: SecureRandom.hex(20))
   end
 
   def unfavorite user
