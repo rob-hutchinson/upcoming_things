@@ -8,6 +8,7 @@ class AlbumsController < ApplicationController
   def favorite
     album = Album.find params[:album_id].to_i
     album.favorite current_user
+    Calendar.new.add_event current_user, album
     head :ok
   end
 
