@@ -15,6 +15,7 @@ gem 'slim-rails'
 gem 'httparty'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
+gem 'google-api-client'
 
 group :development, :test do
   gem 'better_errors'
