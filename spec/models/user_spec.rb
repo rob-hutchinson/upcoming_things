@@ -65,7 +65,7 @@ RSpec.describe User, type: :model do
     expect(album2.favorites.count).to eq 1
   end
 
-  fit "can check the distance between two users" do
+  it "can check the distance between two users" do
     2.times do |x|
       FactoryGirl.create :user
     end
@@ -84,7 +84,7 @@ RSpec.describe User, type: :model do
     expect(User.new.check_distance User.first, User.last).to eq 0.4
   end
 
-  it "can find the closest match between users" do
+  fit "can find the closest match between users" do
     3.times do |x|
       FactoryGirl.create :user
     end

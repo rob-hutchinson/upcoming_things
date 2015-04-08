@@ -24,19 +24,21 @@ class User < ActiveRecord::Base
 
   def recommendations
     matching_user = find_match
-    
+    unless matching_user.nil?
+    end
 
   end
 
   def find_match
-    current_match = 0
+    current_match = 0.1
+    current_matching_users = []
     User.where("id != #{self.id}").find_each do |x|
       distance = check_distance self, x
-      if distance > current_match
+      if distance > current_match || distance == current_match
         current_match = distance
-        current_matching_user = x
+        current_matching_users << x
       end
-    return current_matching_user
+    return current_matching_users.sample
     end
   end
 
