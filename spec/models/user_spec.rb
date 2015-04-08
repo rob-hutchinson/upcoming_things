@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   
   it "can favorite albums" do
-    user1 = FactoryGirl.create :user
-    album1 = FactoryGirl.create :album, artist: "Dan Deacon"
+    user1 = create :user
+    album1 = create :album, artist: "Dan Deacon"
 
     album1.favorite user1
 
@@ -13,9 +13,9 @@ RSpec.describe User, type: :model do
   end
 
   it "can have multiple users favorite the same album" do
-    user1 = FactoryGirl.create :user
-    user2 = FactoryGirl.create :user
-    album1 = FactoryGirl.create :album, artist: "The Decemberists"
+    user1 = create :user
+    user2 = create :user
+    album1 = create :album, artist: "The Decemberists"
 
     album1.favorite user1
     album1.favorite user2
@@ -26,9 +26,9 @@ RSpec.describe User, type: :model do
   end
 
   it "can have multiple favorites" do
-    user1 = FactoryGirl.create :user
-    album1 = FactoryGirl.create :album, artist: "Courtney Barnett"
-    album2 = FactoryGirl.create :album, artist: "Fleet Foxes"
+    user1 = create :user
+    album1 = create :album, artist: "Courtney Barnett"
+    album2 = create :album, artist: "Fleet Foxes"
 
     album1.favorite user1
     album2.favorite user1
@@ -39,8 +39,8 @@ RSpec.describe User, type: :model do
   end
 
   it "can't favorite the same album twice" do
-    user1 = FactoryGirl.create :user
-    album1 = FactoryGirl.create :album
+    user1 = create :user
+    album1 = create :album
 
     album1.favorite user1
     album1.favorite user1
@@ -51,9 +51,9 @@ RSpec.describe User, type: :model do
   end
 
   it "can unfavorite an album" do
-    user1 = FactoryGirl.create :user
-    album1 = FactoryGirl.create :album
-    album2 = FactoryGirl.create :album
+    user1 = create :user
+    album1 = create :album
+    album2 = create :album
 
     album1.favorite user1
     album2.favorite user1
@@ -67,11 +67,11 @@ RSpec.describe User, type: :model do
 
   it "can check the distance between two users" do
     2.times do |x|
-      FactoryGirl.create :user
+      create :user
     end
 
     5.times do |x|
-      FactoryGirl.create :album
+      create :album
     end
 
     Album.find_each do |x|
@@ -84,13 +84,13 @@ RSpec.describe User, type: :model do
     expect(User.new.check_distance User.first, User.last).to eq 0.4
   end
 
-  fit "can find the closest match between users" do
+  it "can find the closest match between users" do
     3.times do |x|
-      FactoryGirl.create :user
+      create :user
     end
 
     5.times do |x|
-      FactoryGirl.create :album
+      create :album
     end
 
     Album.first.favorite User.first
@@ -108,23 +108,20 @@ RSpec.describe User, type: :model do
 
   it "can recommend albums with 2 users" do
     2.times do |x|
-      FactoryGirl.create :user 
+      create :user 
     end
-    
+    n = 1
     5.times do |x|
-      FactoryGirl.create :album 
+      create :album, artist: "Artist #{n}"
+      n += 1 
     end
     
     Album.first.favorite User.first
     Album.find(3).favorite User.first
-    Album.find(5).favorite User.first
 
     Album.first.favorite User.last
 
-    expect(User.first.recommendations.count).to eq 0
-    expect(User.last.recommendations.count).to eq 2
-    expect(User.last.recommendations.first.artist).to eq "Artist 2" 
-
-    binding.pry
+    expect(User.first.recommendations).to eq nil
+    expect(Album.find(User.last.recommendations).artist).to eq "Artist 3" 
   end 
 end

@@ -24,9 +24,24 @@ class User < ActiveRecord::Base
 
   def recommendations
     matching_user = find_match
+    recommendations = []
     unless matching_user.nil?
+      Favorite.find_each do |x|
+        if matching_user.favorites.include?(x) && self.favorites
+          .exclude?(Favorite.find_by(album_id: x.album_id, user_id: self.id))
+          recommendations << x
+        end
+      end
+    else
+      #Flash Something and redirect?
     end
-
+    
+    unless recommendations.empty?
+      return recommendations.sample.album_id
+    else
+      return nil
+      #Do something else? Compliment their music taste?
+    end
   end
 
   def find_match
@@ -38,8 +53,8 @@ class User < ActiveRecord::Base
         current_match = distance
         current_matching_users << x
       end
-    return current_matching_users.sample
     end
+    return current_matching_users.sample
   end
 
   def check_distance user1, user2
