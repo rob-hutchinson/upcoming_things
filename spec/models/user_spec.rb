@@ -64,4 +64,67 @@ RSpec.describe User, type: :model do
     expect(album1.favorites.count).to eq 0
     expect(album2.favorites.count).to eq 1
   end
+
+  fit "can check the distance between two users" do
+    2.times do |x|
+      FactoryGirl.create :user
+    end
+
+    5.times do |x|
+      FactoryGirl.create :album
+    end
+
+    Album.find_each do |x|
+      x.favorite User.first
+    end
+
+    Album.first.favorite User.last
+    Album.last.favorite User.last
+
+    expect(User.new.check_distance User.first, User.last).to eq 0.4
+  end
+
+  it "can find the closest match between users" do
+    3.times do |x|
+      FactoryGirl.create :user
+    end
+
+    5.times do |x|
+      FactoryGirl.create :album
+    end
+
+    Album.first.favorite User.first
+    Album.find(3).favorite User.first
+    Album.find(5).favorite User.first
+
+    Album.first.favorite User.find(2)
+
+    Album.find(2).favorite User.last
+
+    expect(User.first.find_match).to eq User.find(2)
+    expect(User.find(2).find_match).to eq User.first
+    expect(User.last.find_match).to eq nil
+  end
+
+  it "can recommend albums with 2 users" do
+    2.times do |x|
+      FactoryGirl.create :user 
+    end
+    
+    5.times do |x|
+      FactoryGirl.create :album 
+    end
+    
+    Album.first.favorite User.first
+    Album.find(3).favorite User.first
+    Album.find(5).favorite User.first
+
+    Album.first.favorite User.last
+
+    expect(User.first.recommendations.count).to eq 0
+    expect(User.last.recommendations.count).to eq 2
+    expect(User.last.recommendations.first.artist).to eq "Artist 2" 
+
+    binding.pry
+  end 
 end
