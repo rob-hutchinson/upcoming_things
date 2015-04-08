@@ -22,20 +22,17 @@ class User < ActiveRecord::Base
     end
   end
 
-  def recommendations
+  def recommendation
     matching_user = find_match
     recommendations = []
-    unless matching_user.nil?
-      Favorite.find_each do |x|
-        if matching_user.favorites.include?(x) && self.favorites
-          .exclude?(Favorite.find_by(album_id: x.album_id, user_id: self.id))
-          recommendations << x
-        end
-      end
-    else
-      #Flash Something and redirect?
-    end
     
+    Favorite.find_each do |x|
+      if matching_user.favorites.include?(x) && self.favorites
+        .exclude?(Favorite.find_by(album_id: x.album_id, user_id: self.id))
+        recommendations << x
+      end
+    end
+
     unless recommendations.empty?
       return recommendations.sample.album_id
     else
@@ -45,27 +42,28 @@ class User < ActiveRecord::Base
   end
 
   def find_match
-    current_match = 0.1
-    current_matching_users = []
+    matching_users = []
     User.where("id != #{self.id}").find_each do |x|
-      distance = check_distance self, x
-      if distance > current_match || distance == current_match
-        current_match = distance
-        current_matching_users << x
-      end
+      distance = check_distance x
+      matching_users << [distance, x]
     end
-    return current_matching_users.sample
+    matching_users.sort!.last[1]
   end
 
-  def check_distance user1, user2
+  def check_distance other_user
     faves_in_common = 0
     unique_albums = Favorite.uniq.pluck(:album_id)
     unique_albums.each do |x|  
-      if user1.favorites.find_by(album_id: x) && user2.favorites.find_by(album_id: x)
+      if self.favorites.find_by(album_id: x) && other_user.favorites.find_by(album_id: x)
         faves_in_common += 1
       end    
     end
-    distance = (faves_in_common * faves_in_common).to_f / (user1.favorites.count * user2.favorites.count).to_f  
+    
+    unless self.favorites.count == 0 || other_user.favorites.count == 0
+      distance = (faves_in_common * faves_in_common).to_f / (self.favorites.count * other_user.favorites.count).to_f  
+    else
+      distance = 0.0
+    end
   end
 
 end

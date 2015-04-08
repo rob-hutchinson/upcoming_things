@@ -81,7 +81,7 @@ RSpec.describe User, type: :model do
     Album.first.favorite User.last
     Album.last.favorite User.last
 
-    expect(User.new.check_distance User.first, User.last).to eq 0.4
+    expect(User.first.check_distance User.last).to eq 0.4
   end
 
   it "can find the closest match between users" do
@@ -99,11 +99,9 @@ RSpec.describe User, type: :model do
 
     Album.first.favorite User.find(2)
 
-    Album.find(2).favorite User.last
-
     expect(User.first.find_match).to eq User.find(2)
     expect(User.find(2).find_match).to eq User.first
-    expect(User.last.find_match).to eq nil
+    expect(User.last.find_match).to eq User.find(2)
   end
 
   it "can recommend albums with 2 users" do
@@ -121,7 +119,37 @@ RSpec.describe User, type: :model do
 
     Album.first.favorite User.last
 
-    expect(User.first.recommendations).to eq nil
-    expect(Album.find(User.last.recommendations).artist).to eq "Artist 3" 
-  end 
+    expect(User.first.recommendation).to eq nil
+    expect(Album.find(User.last.recommendation).artist).to eq "Artist 3" 
+  end
+
+  it "can appropriately recommend albums when there are more than 2 users" do
+    4.times do |x|
+      create :user
+    end
+
+    10.times do |x|
+      create :album
+    end
+
+    Album.find_each do |x|
+      x.favorite User.first
+    end
+
+    Album.where("id > 1").find_each do |x|
+      x.favorite User.find(2)
+    end
+
+    Album.find(1).favorite User.find(3)
+    Album.find(2).favorite User.find(3)
+
+    Album.find(1).favorite User.find(4)
+    Album.find(2).favorite User.find(4)
+    Album.find(3).favorite User.find(4)
+
+    expect(User.first.recommendation).to eq nil
+    expect(User.find(2).recommendation).to eq 1
+    expect(User.find(3).recommendation).to eq 3
+  end
+
 end
