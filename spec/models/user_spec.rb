@@ -6,7 +6,7 @@ RSpec.describe User, type: :model do
     user1 = create :user
     album1 = create :album, artist: "Dan Deacon"
 
-    album1.favorite user1
+    user1.favorite album1
 
     expect(user1.favorites.count).to eq 1
     expect(Album.find(user1.favorites.first.album_id).artist).to eq "Dan Deacon"
@@ -17,8 +17,8 @@ RSpec.describe User, type: :model do
     user2 = create :user
     album1 = create :album, artist: "The Decemberists"
 
-    album1.favorite user1
-    album1.favorite user2
+    user1.favorite album1
+    user2.favorite album1
 
     expect(Favorite.count).to eq 2
     expect(Album.find(user1.favorites.first.album_id).artist).to eq "The Decemberists"
@@ -30,8 +30,8 @@ RSpec.describe User, type: :model do
     album1 = create :album, artist: "Courtney Barnett"
     album2 = create :album, artist: "Fleet Foxes"
 
-    album1.favorite user1
-    album2.favorite user1
+    user1.favorite album1
+    user1.favorite album2
 
     expect(user1.favorites.count).to eq 2
     expect(Album.find(user1.favorites.first.album_id).artist).to eq "Courtney Barnett"
@@ -42,8 +42,8 @@ RSpec.describe User, type: :model do
     user1 = create :user
     album1 = create :album
 
-    album1.favorite user1
-    album1.favorite user1
+    user1.favorite album1
+    user1.favorite album1
 
     expect(Favorite.count).to eq 1
     expect(user1.favorites.count).to eq 1
@@ -55,9 +55,9 @@ RSpec.describe User, type: :model do
     album1 = create :album
     album2 = create :album
 
-    album1.favorite user1
-    album2.favorite user1
-    album1.unfavorite user1
+    user1.favorite album1
+    user1.favorite album2
+    user1.unfavorite album1
 
     expect(Favorite.count).to eq 1
     expect(user1.favorites.count).to eq 1
@@ -75,11 +75,11 @@ RSpec.describe User, type: :model do
     end
 
     Album.find_each do |x|
-      x.favorite User.first
+      User.first.favorite x
     end
 
-    Album.first.favorite User.last
-    Album.last.favorite User.last
+    User.last.favorite Album.first
+    User.last.favorite Album.last
 
     expect(User.first.check_distance User.last).to eq 0.4
   end
@@ -93,11 +93,11 @@ RSpec.describe User, type: :model do
       create :album
     end
 
-    Album.first.favorite User.first
-    Album.find(3).favorite User.first
-    Album.find(5).favorite User.first
+    User.first.favorite Album.first
+    User.first.favorite Album.find(3)
+    User.first.favorite Album.find(5)
 
-    Album.first.favorite User.find(2)
+    User.find(2).favorite Album.first
 
     expect(User.first.find_match).to eq User.find(2)
     expect(User.find(2).find_match).to eq User.first
@@ -114,10 +114,10 @@ RSpec.describe User, type: :model do
       n += 1 
     end
     
-    Album.first.favorite User.first
-    Album.find(3).favorite User.first
+    User.first.favorite Album.first
+    User.first.favorite Album.find(3)
 
-    Album.first.favorite User.last
+    User.last.favorite Album.first
 
     expect(User.first.recommendation).to eq nil
     expect(Album.find(User.last.recommendation).artist).to eq "Artist 3" 
@@ -133,19 +133,19 @@ RSpec.describe User, type: :model do
     end
 
     Album.find_each do |x|
-      x.favorite User.first
+      User.first.favorite x
     end
 
     Album.where("id > 1").find_each do |x|
-      x.favorite User.find(2)
+      User.find(2).favorite x
     end
 
-    Album.find(1).favorite User.find(3)
-    Album.find(2).favorite User.find(3)
+    User.find(3).favorite Album.find(1)
+    User.find(3).favorite Album.find(2)
 
-    Album.find(1).favorite User.find(4)
-    Album.find(2).favorite User.find(4)
-    Album.find(3).favorite User.find(4)
+    User.find(4).favorite Album.find(1)
+    User.find(4).favorite Album.find(2)
+    User.find(4).favorite Album.find(3)
 
     expect(User.first.recommendation).to eq nil
     expect(User.find(2).recommendation).to eq 1

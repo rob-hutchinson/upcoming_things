@@ -22,6 +22,15 @@ class User < ActiveRecord::Base
     end
   end
 
+  def favorite album
+    self.favorites.create(album_id: album.id, id_code: SecureRandom.hex(20))
+  end
+
+  def unfavorite album
+    fave = Favorite.find_by(user_id: self.id, album_id: album.id)
+    fave.delete
+  end
+  
   def recommendation
     matching_user = find_match
     recommendations = []
