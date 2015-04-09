@@ -7,7 +7,7 @@ class AlbumsController < ApplicationController
 
   def favorite
     album = Album.find params[:album_id].to_i
-    album.favorite current_user
+    current_user.favorite album
     Calendar.new.add_event current_user, album
     head :ok
   end
@@ -16,7 +16,7 @@ class AlbumsController < ApplicationController
     album = Album.find params[:album_id].to_i
     event_id = Favorite.find_by(user_id: current_user.id, album_id: album.id).id_code
     Calendar.new.delete_event current_user, event_id
-    album.unfavorite current_user
+    current_user.unfavorite album
     head :ok
   end
 

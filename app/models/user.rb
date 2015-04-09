@@ -20,6 +20,59 @@ class User < ActiveRecord::Base
       u.token_refreshes_at = auth["credentials"]["expires_at"]
       u.auth_data = auth
     end
-
   end
+
+  def favorite album
+    self.favorites.create(album_id: album.id, id_code: SecureRandom.hex(20))
+  end
+
+  def unfavorite album
+    fave = Favorite.find_by(user_id: self.id, album_id: album.id)
+    fave.delete
+  end
+  
+  def recommendation
+    matching_user = find_match
+    recommendations = []
+    
+    Favorite.find_each do |x|
+      if matching_user.favorites.include?(x) && self.favorites
+        .exclude?(Favorite.find_by(album_id: x.album_id, user_id: self.id))
+        recommendations << x
+      end
+    end
+
+    unless recommendations.empty?
+      return recommendations.sample.album_id
+    else
+      return nil
+      #Do something else? Compliment their music taste?
+    end
+  end
+
+  def find_match
+    matching_users = []
+    User.where("id != #{self.id}").find_each do |x|
+      distance = check_distance x
+      matching_users << [distance, x]
+    end
+    matching_users.sort!.last[1]
+  end
+
+  def check_distance other_user
+    faves_in_common = 0
+    unique_albums = Favorite.uniq.pluck(:album_id)
+    unique_albums.each do |x|  
+      if self.favorites.find_by(album_id: x) && other_user.favorites.find_by(album_id: x)
+        faves_in_common += 1
+      end    
+    end
+    
+    unless self.favorites.count == 0 || other_user.favorites.count == 0
+      distance = (faves_in_common * faves_in_common).to_f / (self.favorites.count * other_user.favorites.count).to_f  
+    else
+      distance = 0.0
+    end
+  end
+
 end
