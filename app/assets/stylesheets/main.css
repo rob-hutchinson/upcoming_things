@@ -407,12 +407,12 @@ a:hover {
 }
 
 #content2 {
-  background: url(http://assets.inhabitat.com/wp-content/blogs.dir/1/files/2010/11/vinyl-record-roof.jpg) repeat;
+  background: #000000 repeat;
   background-color: #ebebeb;
 }
 
 #page-title {
-  background: #ffffff;
+  background: #000000;
   margin-top: 50px;
 }
 
