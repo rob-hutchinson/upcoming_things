@@ -11,15 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150406201418) do
+ActiveRecord::Schema.define(version: 20150410135940) do
 
   create_table "albums", force: :cascade do |t|
-    t.string   "artist",       null: false
-    t.string   "album_title",  null: false
-    t.date     "release_date", null: false
+    t.string   "artist",          null: false
+    t.string   "album_title",     null: false
+    t.date     "release_date",    null: false
     t.string   "thumbnail"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "spotify_id"
+    t.string   "spotify_details"
   end
 
   create_table "favorites", force: :cascade do |t|
