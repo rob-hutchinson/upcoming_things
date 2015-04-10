@@ -1,110 +1,89 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  <meta charset="utf-8">
-  <script src="assets/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-  <title>Lava | Designed By Theme Armada</title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<meta charset="utf-8">
+<title>Lava | Designed By Theme Armada</title>
+<%= stylesheet_link_tag    'application', media: 'all' %>
+<%= javascript_include_tag "application" %>
+<%= csrf_meta_tags %>
 </head>
 
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand img-responsive" href="/"><img src="http://www.hypebot.com/.a/6a00d83451b36c69e201a73dbe1c12970d-115wi" width="135" height="55" alt="logo"></a>
+
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand img-responsive" href="/"><img src="" alt="logo"></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active"><a href="/">Home</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages &amp; Features <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+            <li><%= link_to "Albums", albums_list_path %></li>
+              <li><%= link_to "My Concerts", concerts_path %></li>
+              <li><a href="login.html">Log In</a></li>
+              <li><a href="signup.html">Sign Up</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Work <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="3-column.html">3 Column</a></li>
+              <li><a href="4-column.html">4 Column</a></li>
+              <li><a href="individual-work.html">Individual Work</a></li>
+            </ul>
+          </li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.php">Contact</a></li>
+        </ul>
+      </div><!--/.navbar-collapse -->
+    </div>
+  </div>
+
+  <%= yield %>
+
+  <!--Bottom Section-->
+  <section id="bottom">
+    <div class="container">
+      <div class="row margin-40">
+        <div class="col-sm-10 col-sm-offset-1 text-center">
+          <p>|Email|  <a href="mailto:rob.spamfolder@gmail.com"><i class="icon-envelope-alt"></i> rob.spamfolder@gmail.com</a></p>
+          <hr>
         </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="/">Home</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages &amp; Features <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="full-width.html">Full Width</a></li>
-                  <li><a href="services.html">Services</a></li>
-                  <li><a href="about.html">About</a></li>
-                  <li><a href="team.html">Team</a></li>
-                  <li><a href="pricing.html">Pricing</a></li>
-                  <li><a href="blog.html">Blog Loop</a></li>
-                  <li><a href="blog-article.html">Blog Article</a></li>
-                  <li><a href="login.html">Log In</a></li>
-                  <li><a href="signup.html">Sign Up</a></li>
-                  <li><a href="icons.html">Icons</a></li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Work <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="3-column.html">3 Column</a></li>
-                  <li><a href="4-column.html">4 Column</a></li>
-                  <li><a href="individual-work.html">Individual Work</a></li>
-                </ul>
-              </li>
-              <li><a href="blog.html">Blog</a></li>
-              <li><a href="contact.php">Contact</a></li>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 text-center">
+          <!--Social Icons-->          
+          <ul class="social-icons">
+            <li><a class="twitter" href="http://www.twitter.com/lag0s" target="_blank"><i class="fa fa-twitter fa-3x"></i></a></li>
+            <li><a class="facebook" href="http://www.facebook.com" target="_blank"><i class="fa fa-facebook fa-3x"></i></a></li>
+            <li><a class="Github" href="http://www.github.com/rob-hutchinson" target="_blank"><i class="fa fa-github-alt fa-3x"></i></a></li>
           </ul>
-        </div><!--/.navbar-collapse -->
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <p>@ Copyright. All Rights Reserved. Created by <a href="http://www.themearmada.com">Theme Armada.</a></p>
+        </div>
       </div>
     </div>
+  </section>
 
-<%= yield %>
 
-<!--Bottom Section-->
-    <section id="bottom">
-      <div class="container">
-        <div class="row margin-40">
-          <div class="col-sm-10 col-sm-offset-1 text-center">
-            <p>|Email|  <a href="mailto:rob.spamfolder@gmail.com"><i class="icon-envelope-alt"></i> rob.spamfolder@gmail.com</a></p>
-            <hr>
-          </div>
-        </div>
-        
-        <div class="row">
-          <div class="col-sm-10 col-sm-offset-1 text-center">
-            <!--Social Icons-->          
-            <ul class="social-icons">
-              <li><a class="twitter" href="http://www.twitter.com/lag0s" target="_blank"><i class="fa fa-twitter fa-3x"></i></a></li>
-              <li><a class="facebook" href="http://www.facebook.com" target="_blank"><i class="fa fa-facebook fa-3x"></i></a></li>
-              <li><a class="Github" href="http://www.github.com/rob-hutchinson" target="_blank"><i class="fa fa-github-alt fa-3x"></i></a></li>
-            </ul>
-          </div>
-        </div>
-        
-      </div>
-    </section>
-
-<section id="footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12 text-center">
-            <p>@ Copyright. All Rights Reserved. Created by <a href="http://www.themearmada.com">Theme Armada.</a></p>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    
-    <!-- Javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/jquery-1.11.2.min.js"><\/script>')</script>
-    <script src="assets/bootstrap.min.js"></script>
-    <script src="assets/main.js"></script>
-    
-    <script>
-      !function ($) {
-        $(function(){
-          $('#header').carousel()
-        })
-      }(window.jQuery)
-    </script>
 </body>
 </html>
 
