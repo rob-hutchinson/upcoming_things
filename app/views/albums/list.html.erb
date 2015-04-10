@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th>#</th>
+      <th></th>
       <th>Artist</th>
       <th>Album</th>
       <th>Release Date</th>
@@ -12,6 +13,7 @@
     <% @albums.each do |x| %>
       <tr>
         <td><%= x.id %></td>
+        <td><div class="image-container" style="background-image: url(<%= x.thumbnail %>);"></div></td>
         <td><%= x.artist %></td>
         <td><%= x.album_title %></td>
         <td><%= x.release_date %></td>
