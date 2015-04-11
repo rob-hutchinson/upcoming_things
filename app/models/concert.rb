@@ -11,7 +11,7 @@ class Concert
       sort_order=date&location=#{zipcode}&within=25&date=future&page_size=100
       &keywords=#{x}", query: {"app_key"=> Figaro.env.eventful_key})
     end
-  
+
     all_events = data.map {|x| if x["search"]["total_items"].to_i > 0 
       then x["search"]["events"]["event"] end }.compact
     

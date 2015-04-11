@@ -8,7 +8,7 @@ class AlbumsController < ApplicationController
   def favorite
     album = Album.find params[:album_id].to_i
     current_user.favorite album
-    Calendar.new.add_event current_user, album
+    Calendar.new.add_album current_user, album
     head :ok
   end
 
@@ -18,6 +18,11 @@ class AlbumsController < ApplicationController
     Calendar.new.delete_event current_user, event_id
     current_user.unfavorite album
     head :ok
+  end
+
+  def add_concert
+    binding.pry
+    Calendar.new.add_concert current_user, params
   end
 
   def concert

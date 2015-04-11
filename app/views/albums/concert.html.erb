@@ -1,28 +1,38 @@
-<table class="table table-striped table-hover ">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Artist</th>
-      <th>Venue</th>
-      <th>Concert Date</th>
-      <th>Tickets</th>
-      <th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @concerts.each do |x| %>
-      <tr>
-        <td>
-          <% unless x["image"].nil? %>
-          <img src= <%= x["image"]["medium"]["url"]%>>
-          <% else %>
-          <img src= "http://img2.wikia.nocookie.net/__cb20141105223610/r2d/images/7/73/Dogepic.png", length="128", width="128">
-          <% end %>
-        </td>
-        <td><%= x["title"] %></td>
-        <td><%= x["venue_name"] %></td>
-        <td><%= Date.parse(x["start_time"]) %></td>
-        <td><%= link_to "Search For Tickets", x["url"] %></td>
-      </tr>
-    <% end %>
-</table> 
+<!--Content-->
+    <section id="page-title" class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <h3>Upcoming Concerts</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!--Content-->      
+    <section id="content2" class="section">
+      <div class="container">
+        <div class="row">
+
+      <!--Blog Post-->
+      <% @concerts.each do |x| %>
+        <article class="blog-post margin-60">
+          <div class="date-container"><%= Date::MONTHNAMES[Date.parse(x["start_time"]).month] %> 
+          <span class="day"><%= Date.parse(x["start_time"]).day %></span></div>
+            <% unless x["image"].nil? %>
+                <img src= <%= x["image"]["medium"]["url"]%>, length="240", width="240">
+                <% else %>
+                <img src= "http://img2.wikia.nocookie.net/__cb20141105223610/r2d/images/7/73/Dogepic.png", length="240", width="240">
+                <% end %>
+              <h3><a href=<%= x["performers"]["performer"]["url"] %> target="_blank"><%= x["title"] %></a> ~ <a href=<%= x["venue_url"]%> target="_blank"><%= x["venue_name"] %></a></h3>
+                <br />
+              <a class="btn-main" href=<%= x["url"] %>><i class="fa fa-chevron-right"></i>Find Tickets</a>
+              <br>
+              <br>
+              <%= form_tag add_concert_path(x), method: :post %><button class="btn-main add-concert" data-id=<% x %> data-action="add"><i class="fa fa-calendar"></i>  Add to Google Calendar</button></form>
+            </article>
+            </div>
+            <% end %>
+  </div>
+</section>

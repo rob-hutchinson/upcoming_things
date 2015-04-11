@@ -5,7 +5,10 @@ Rails.application.routes.draw do
 
   get "/albums/list" => "albums#list", as: "albums_list"
   get "/albums/concerts" => "albums#concert", as: "concerts"
+  post "/albums/concerts/add" => "albums#add_concert", as: "add_concert"
 
   post "/albums/:album_id/favorite" => "albums#favorite", as: "favorite_album"
   delete "albums/:album_id/unfavorite" => "albums#unfavorite", as: "unfavorite_album"
+
+
 end
