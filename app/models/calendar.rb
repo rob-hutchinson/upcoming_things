@@ -1,8 +1,7 @@
 require "google/api_client"
-# require "figaro" 
-# require "pry"
 
   class Calendar 
+
 
     def add_event user, album
       client = Google::APIClient.new(
@@ -43,7 +42,6 @@ require "google/api_client"
         application_version: "0.0.1"
       )
 
-      # client.authorization = Google::APIClient::ClientSecrets.load.to_authorization
       client.authorization.client_id = Figaro.env.google_client_id
       client.authorization.client_secret = Figaro.env.google_secret
       client.authorization.scope = 'https://www.googleapis.com/auth/calendar'

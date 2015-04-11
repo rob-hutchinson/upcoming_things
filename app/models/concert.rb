@@ -15,9 +15,8 @@ class Concert
     all_events = data.map {|x| if x["search"]["total_items"].to_i > 0 
       then x["search"]["events"]["event"] end }.compact
     
-    unless all_events.empty?
       all_events.each do |x|
-        if x.count == 42
+        if x.class == Hash
           if artists.include?(x["title"])
             concerts << x
           end
@@ -29,8 +28,7 @@ class Concert
           end
         end
       end
-    end
-
+      
     concerts
   end
 

@@ -31,8 +31,8 @@
               </div>
               
               <div class="project-title margin-30">
-                <h4><%= x.artist %></h4>
-                <h4><%= x.album_title %></h4>
+                <h5><%= x.artist %></h5>
+                <h5><%= x.album_title %></h5>
                 <% if @favorites.include? x.id %>
                   <%= form_tag unfavorite_album_path(x), method: :delete %>
                   <button class="btn btn-danger" data-id=<%=x.id%> data-action="unfavorite">Unfollow</button></form>
