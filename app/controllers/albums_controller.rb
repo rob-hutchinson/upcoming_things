@@ -21,7 +21,6 @@ class AlbumsController < ApplicationController
   end
 
   def add_concert
-    binding.pry
     Calendar.new.add_concert current_user, params
   end
 
@@ -30,6 +29,7 @@ class AlbumsController < ApplicationController
     artists = faves.map { |x| Album.find(x).artist }
     
     concerts = Concert.new.search artists, 22201
+    concerts.sort_by! { |x| x["start_time"] }
 
     unless concerts.empty?
       @concerts = concerts

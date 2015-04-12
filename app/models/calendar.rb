@@ -73,7 +73,7 @@ require "google/api_client"
       client.authorization.expires_in = 3600
       
       calendar = client.discovered_api('calendar', 'v3')
-binding.pry
+
       event = {
         'summary' => "#{concert_info["title"]} Concert At #{concert_info["venue_name"]}",
         'start' => {'date' => "#{Date.parse(concert_info["start_time"])}"},

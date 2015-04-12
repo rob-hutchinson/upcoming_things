@@ -21,6 +21,8 @@
             <!--Project Thumbnail One-->
             <div class="col-sm-3">
               <div class="thumbs">
+                <div class="date-container"><%= Date::MONTHNAMES[x.release_date.month] %> 
+          <span class="day"><%= x.release_date.day %></span></div>
                 <div class="image-container" style="background-image: url(<%= x.thumbnail %>);">
                   <a href="individual-work.html">
                     <span class="title">

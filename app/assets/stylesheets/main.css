@@ -110,7 +110,7 @@ a:hover {
             background-image:"http://i.stack.imgur.com/2OrtT.jpg";
             background-repeat: no-repeat;
             background-position: 50% 50%;
-            float:left;
+            float:top;
         }
 
 
@@ -406,7 +406,7 @@ a:hover {
 }
 
 #content1 {
-  background: #ffffff;
+  background: #000000;
   margin-top: 50px;
 }
 
@@ -416,7 +416,7 @@ a:hover {
 }
 
 #page-title {
-  background: #000000;
+  background: #ffffff;
   margin-top: 50px;
 }
 
@@ -918,7 +918,7 @@ ul.social-icons-signup li a:hover {
 .thumbs {
   width: 100%;
   float: left;
-  overflow: hidden;
+  overflow: visible;
   position: relative;
   margin-bottom: 30px;
 }
