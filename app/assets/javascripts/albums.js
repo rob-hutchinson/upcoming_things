@@ -27,21 +27,3 @@ $(function() {
     }
   });
 });
-
-$(function() {
-  $("#concert button").click(function(e) {
-    e.preventDefault();
-    var $this = $(this);
-    console.log("FUUUUUUUUUUU")
-
-    var $that = $this;
-    if ($this.data('action') === 'add') {
-      $.ajax("/albums/concert/add", {
-        method: "POST",
-        success: function() {
-        },
-        error: function() { alert("ERROR...ERROR"); }
-      });
-    }
-  });
-});

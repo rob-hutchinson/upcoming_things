@@ -8,6 +8,9 @@ class ApplicationController < ActionController::Base
   end
 
   def home
+    if current_user
+      @favorites = current_user.favorites
+    end
   end
 
 end
