@@ -32,14 +32,18 @@ class AlbumsController < ApplicationController
     faves = current_user.favorites.pluck(:album_id)
     artists = faves.map { |x| Album.find(x).artist }
     
-    concerts = Concert.new.search artists, 22201
-    concerts.sort_by! { |x| x["start_time"] }
+    if current_user.zip_code.nil?
+      flash[:alert] = "Please enter your zip code to search for concerts!"
+      return :ok
+    else
+      concerts = Concert.new.search artists, current_user.zip_code
+      concerts.sort_by! { |x| x["start_time"] }
+    end
 
     unless concerts.empty?
       @concerts = concerts
     else
-      #flash message about no concerts and redirect
-    redirect_to root_path
+      flash[:alert] = "No concerts were found for your favorite artists. Sorry!"
     end
   end
 

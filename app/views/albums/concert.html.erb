@@ -1,3 +1,4 @@
+
 <!--Content-->
     <section id="page-title" class="section">
       <div class="container">
@@ -9,6 +10,45 @@
       </div>
     </section>
 
+    <!--Flash Message-->
+    <div class="container">
+      <div class="flash">
+        <% flash.each do |name, msg| %>
+        <div class="alert alert-<%= flash_class name %>">
+          <%= msg %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+
+  <section>
+    <div class="container">
+      <div class="col-sm-6 col-sm-offset-3 text-center signup">
+        <div class="row margin-40">
+          <%= form_tag zip_edit_path, method: :post %>
+          <class="form-horizontal">
+            <div class="control-group">
+              <div class="controls">
+                <div class="input-prepend">
+                    <input type="text" class="input-xlarge" id="zip_code" name="zip_code" placeholder="Zip Code">
+                  </div>
+                </div>
+              </div>
+                
+              <div class="control-group">
+                <div class="controls">
+                    <button type="submit" class="btn-main"><i class="fa fa-sign-in"></i> Update</button>
+                </div>
+              </div>
+            
+            </form>
+          </div>
+        </div>
+    </div>
+  </section>
+  <br>
+  <br>
+  <br>
 
     <!--Content-->      
     <section id="content2" class="section">
@@ -16,7 +56,8 @@
         <div class="row">
 
       <!--Blog Post-->
-      <% @concerts.each do |x| %>
+      <% unless @concerts.nil? %>
+        <%@concerts.each do |x| %>
         <article class="blog-post margin-60">
           <div class="date-container"><%= Date::MONTHNAMES[Date.parse(x["start_time"]).month] %> 
           <span class="day"><%= Date.parse(x["start_time"]).day %></span></div>
@@ -29,6 +70,7 @@
               <%= form_tag add_concert_path(x), method: :post %><button class="btn-main add-concert" data-id=<% x %> data-action="add"><i class="fa fa-calendar"></i>  Add to Google Calendar</button></form>
             </article>
             <% end %>
+          <% end %>
           </div>
       </div>
 </section>
