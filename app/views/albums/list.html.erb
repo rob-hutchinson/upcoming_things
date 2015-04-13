@@ -32,7 +32,7 @@
             
                 <!--Project Thumbnail One-->
                 <div class="col-sm-3">
-                  <div class="thumbs">
+                  <div >
                     <div class="date-container"><%= Date::MONTHNAMES[x.release_date.month] %> 
                       <span class="day"><%= x.release_date.day %></span>
                     </div>
@@ -41,7 +41,11 @@
                   
               
                       <div class="project-title margin-30">
-                        <h5><%= x.artist %></h5>
+                        <% unless x.spotify_id.nil? %>
+                          <h5><a href="https://open.spotify.com/artist/<%=x.spotify_id%>", target="_blank"><%= x.artist %></a></h5>
+                        <% else %>
+                          <h5><%= x.artist %></h5>
+                        <% end %>
                         <h5><%= x.album_title %></h5>
                         <% if @favorites.include? x.id %>
                           <%= form_tag unfavorite_album_path(x), method: :delete %>
@@ -65,7 +69,7 @@
             
                   <!--Project Thumbnail One-->
                   <div class="col-sm-3">
-                    <div class="thumbs">
+                    <div>
                       <div class="date-container"><%= Date::MONTHNAMES[x.release_date.month] %> 
                         <span class="day"><%= x.release_date.day %></span>
                       </div>
@@ -74,7 +78,11 @@
                     
               
                         <div class="project-title margin-30">
+                        <% unless x.spotify_id.nil? %>
+                          <h5><a href="https://open.spotify.com/artist/<%=x.spotify_id%>", target="_blank"><%= x.artist %></a></h5>
+                        <% else %>
                           <h5><%= x.artist %></h5>
+                        <% end %>
                           <h5><%= x.album_title %></h5>
                             <% if @favorites.include? x.id %>
                               <%= form_tag unfavorite_album_path(x), method: :delete %>
