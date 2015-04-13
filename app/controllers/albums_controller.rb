@@ -3,6 +3,10 @@ class AlbumsController < ApplicationController
   def list
     @albums = Album.all
     @favorites = current_user.favorites.pluck :album_id
+    unless current_user.recommendation.nil?
+      flash[:alert] = "Hey, you've got great taste in music! 
+        Have you considered giving #{Album.find(current_user.recommendation).artist} a listen?"
+    end
   end
 
   def favorite

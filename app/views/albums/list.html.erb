@@ -8,6 +8,16 @@
         </div>
       </div>
     </section>
+
+    <div class="container">
+      <div class="flash">
+        <% flash.each do |name, msg| %>
+        <div class="alert alert-<%= flash_class name %>">
+          <%= msg %>
+        </div>
+        <% end %>
+      </div>
+    </div>
       
      
     <!--Work-->
