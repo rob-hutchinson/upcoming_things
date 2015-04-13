@@ -1,3 +1,4 @@
+<section>
 <!-- Carousel
     Change your images in the main.css file.
     ================================================== -->
@@ -42,4 +43,48 @@
       <a class="left carousel-control hidden-xs" href="#header" data-slide="prev"><i class="fa fa-angle-left"></i></a>
       <a class="right carousel-control hidden-xs" href="#header" data-slide="next"><i class="fa fa-angle-right"></i></a>
     </div><!-- /.carousel -->
+  </section>
+
+    <% if current_user %>
+      <section id="page-title" class="section">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 text-center">
+              <h3>My Favorites</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="content2" class="section">
+        <div class="container text-center">          
+            
+          <div class="row margin-40" id="albums_list">
+            <% @favorites.each do |x| %>
+              <% y = Album.find(x) %>
+                  <!--Project Thumbnail One-->
+                  <div class="col-sm-3">
+                    <div >
+                      <div class="date-container"><%= Date::MONTHNAMES[y.release_date.month] %> 
+                        <span class="day"><%= y.release_date.day %></span>
+                      </div>
+                        <div class="image-container" style="background-image: url(<%= y.thumbnail %>);">
+                        </div>
+                    
+                
+                        <div class="project-title margin-30">
+                          <% unless y.spotify_id.nil? %>
+                            <h5><a href="https://open.spotify.com/artist/<%=y.spotify_id%>", target="_blank"><%= y.artist %></a></h5>
+                          <% else %>
+                            <h5><%= y.artist %></h5>
+                          <% end %>
+                          <h5><%= y.album_title %></h5>
+                        </div>
+                    </div>
+                  </div>
+            <% end %>
+          </div>
+        </div><!--End Row of Work-->
+      </section>
+    <% end %>
 

@@ -5,37 +5,18 @@
           
             <div class="col-sm-6 col-sm-offset-3 text-center signup">
               <h3>Log In</h3><br />
-              
+
               <ul class="list-inline social-icons-signup">
-                 <li><a class="google" href="/users/auth/google_oauth2"><i class="fa fa-google-plus-square fa-5x"></i></a></li>
+                 <li><i class="fa fa-google-plus fa-5x"></i></a></li>
                </ul>
-               
-               <p>------------ OR -------------</p>
-              
-              <form id="signup-form" class="form-horizontal" method="post" action="#">
-              <div class="control-group">
-                <div class="controls">
-                    <div class="input-prepend">
-                     <span class="add-on"><i class="fa fa-user"></i></span>
-                    <input type="text" class="input-xlarge" id="fname" name="fname" placeholder="Username">
-                  </div>
-                </div>
-              </div>
-                                          
-              <div class="control-group">
-                <div class="controls">
-                    <div class="input-prepend">
-                  <span class="add-on"><i class="fa fa-lock"></i></span>
-                    <input type="Password" id="passwd" class="input-xlarge" name="passwd" placeholder="Password">
-                  </div>
-                </div>
-              </div>
+
           
               <div class="control-group">
                   <div class="controls">
-                   <button type="submit" class="btn-main"><i class="fa fa-sign-in"></i> Log In</button>
+                   <a href="/users/auth/google_oauth2"><button type="submit" class="btn-main"><i class="fa fa-sign-in"></i> Log In</button>
+                   </a>
                   </div>
-                  <a class="small-message" href="#"><small>Need An Account?</small></a>
+                  <small>(With Your Google Account)</small>
               </div>
       
               </form>

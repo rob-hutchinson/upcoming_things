@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   def home
     if current_user
-      @favorites = current_user.favorites
+      @favorites = current_user.favorites.pluck(:album_id)
     end
   end
 
