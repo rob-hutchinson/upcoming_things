@@ -14,37 +14,72 @@
     <section id="content2" class="section">
       <div class="container text-center">          
           
-          <div class="row margin-40" id="albums_list">
-
+        <div class="row margin-40" id="albums_list">
+          <% current_date = Date.current %>
             <% @albums.each do |x| %>
               <% unless x.release_date < Time.now %>
+                <% if x.release_date == current_date %>    
             
-            <!--Project Thumbnail One-->
-            <div class="col-sm-3">
-              <div class="thumbs">
-                <div class="date-container"><%= Date::MONTHNAMES[x.release_date.month] %> 
-          <span class="day"><%= x.release_date.day %></span></div>
-                <div class="image-container" style="background-image: url(<%= x.thumbnail %>);">
-                </div>
-              </div>
+                <!--Project Thumbnail One-->
+                <div class="col-sm-3">
+                  <div class="thumbs">
+                    <div class="date-container"><%= Date::MONTHNAMES[x.release_date.month] %> 
+                      <span class="day"><%= x.release_date.day %></span>
+                    </div>
+                      <div class="image-container" style="background-image: url(<%= x.thumbnail %>);">
+                      </div>
+                  
               
-              <div class="project-title margin-30">
-                <h5><%= x.artist %></h5>
-                <h5><%= x.album_title %></h5>
-                <% if @favorites.include? x.id %>
-                  <%= form_tag unfavorite_album_path(x), method: :delete %>
-                  <button class="btn btn-danger" data-id=<%=x.id%> data-action="unfavorite">Unfollow</button></form>
-              <% else %>
-                  <%= form_tag favorite_album_path(x), method: :post %>
-                  <button class="btn btn-success" data-id=<%=x.id%> data-action="favorite">Follow</button></form>
-              <% end %>
-              </div>
-            </div>
+                      <div class="project-title margin-30">
+                        <h5><%= x.artist %></h5>
+                        <h5><%= x.album_title %></h5>
+                        <% if @favorites.include? x.id %>
+                          <%= form_tag unfavorite_album_path(x), method: :delete %>
+                            <button class="btn btn-danger" data-id=<%=x.id%> data-action="unfavorite">Unfollow</button></form>
+                        <% else %>
+                          <%= form_tag favorite_album_path(x), method: :post %>
+                            <button class="btn btn-success" data-id=<%=x.id%> data-action="favorite">Follow</button></form>
+                        <% end %>
+                      </div>
+                  </div>
+                </div>
+                  
+                <% else %>
+                  <% current_date = x.release_date %>
+                  
+                  <div class="container">
+                      <div class="col-sm-12 text-center">
+                        <h3 style="padding-bottom: 100px"><%= Date::MONTHNAMES[x.release_date.month] %> <%= x.release_date.day %>, <%=x.release_date.year %></h3>
+                      </div>
+                  </div>
+            
+                  <!--Project Thumbnail One-->
+                  <div class="col-sm-3">
+                    <div class="thumbs">
+                      <div class="date-container"><%= Date::MONTHNAMES[x.release_date.month] %> 
+                        <span class="day"><%= x.release_date.day %></span>
+                      </div>
+                        <div class="image-container" style="background-image: url(<%= x.thumbnail %>);">
+                        </div>
+                    </div>
+              
+                        <div class="project-title margin-30">
+                          <h5><%= x.artist %></h5>
+                          <h5><%= x.album_title %></h5>
+                            <% if @favorites.include? x.id %>
+                              <%= form_tag unfavorite_album_path(x), method: :delete %>
+                              <button class="btn btn-danger" data-id=<%=x.id%> data-action="unfavorite">Unfollow</button></form>
+                            <% else %>
+                              <%= form_tag favorite_album_path(x), method: :post %>
+                              <button class="btn btn-success" data-id=<%=x.id%> data-action="favorite">Follow</button></form>
+                            <% end %>
+                        </div>
+                  </div>  
+                <% end %>
               <% end %>
             <% end %>
-
-          </div>
-            
+        </div>
       </div><!--End Row of Work-->
+    </section>
 
 
