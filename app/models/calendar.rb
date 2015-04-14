@@ -73,11 +73,12 @@ require "google/api_client"
       client.authorization.expires_in = 3600
       
       calendar = client.discovered_api('calendar', 'v3')
+      concert_info = concert_info.split("/")
 
       event = {
-        'summary' => "#{concert_info["title"]} Concert At #{concert_info["venue_name"]}",
-        'start' => {'date' => "#{Date.parse(concert_info["start_time"])}"},
-        'end' => {'date' => "#{Date.parse(concert_info["start_time"])}"},
+        'summary' => "#{concert_info[0]} Concert At #{concert_info[1]}",
+        'start' => {'date' => "#{Date.parse(concert_info[2])}"},
+        'end' => {'date' => "#{Date.parse(concert_info[2])}"},
         }
 
       result = client.execute(

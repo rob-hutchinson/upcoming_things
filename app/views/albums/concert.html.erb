@@ -57,7 +57,7 @@
 
       <!--Blog Post-->
       <% unless @concerts.nil? %>
-        <%@concerts.each do |x| %>
+        <% @concerts.each do |x| %>
         <article class="blog-post margin-60">
           <div class="date-container"><%= Date::MONTHNAMES[Date.parse(x["start_time"]).month] %> 
           <span class="day"><%= Date.parse(x["start_time"]).day %></span></div>
@@ -67,7 +67,9 @@
               <a class="btn-main" href=<%= x["url"] %> target="_blank"><i class="fa fa-eye"></i>  Find Tickets</a>
               <br>
               <br>
-              <%= form_tag add_concert_path(x), method: :post %><button class="btn-main add-concert" data-id=<% x %> data-action="add"><i class="fa fa-calendar"></i>  Add to Google Calendar</button></form>
+              <% y = [x["title"], x["venue_name"], x["start_time"]] %>
+              <%= form_tag add_concert_path(y), method: :post %><button class="btn-main add-concert" data-id=<% x["title"] %> data-action="add"><i class="fa fa-calendar"></i>  Add to Google Calendar
+              </button></form>
             </article>
             <% end %>
           <% end %>
