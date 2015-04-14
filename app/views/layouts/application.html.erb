@@ -43,7 +43,18 @@
       </div><!--/.navbar-collapse -->
     </div>
   </div>
-
+ 
+ <!--Flash Message-->
+    <div class="container">
+      <div class="flash">
+        <% flash.each do |name, msg| %>
+        <div class="alert alert-<%= flash_class name %>" style="text-align: center">
+          <%= msg %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+    
   <%= yield %>
 
   <!--Bottom Section-->
