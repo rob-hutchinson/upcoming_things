@@ -21,7 +21,7 @@ h1 {
   font-size: 62px;
   line-height: 60px;
   text-transform: uppercase;
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 0;
   text-shadow: 0 1px 1px rgba(0,0,0,.4);
 }
@@ -823,7 +823,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
    Sign Up Page styles
    ========================================================================== */
 #signup {
-  background: url(../img/testimonial-bg.jpg) no-repeat;
+  background: url(/assets/testimonial-bg.jpg) no-repeat;
   background-size: cover;
   padding-top: 120px;
   padding-bottom: 120px;

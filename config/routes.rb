@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
   
+  devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
+
   root "application#home"
 
   get "/albums/list" => "albums#list", as: "albums_list"
@@ -11,5 +12,13 @@ Rails.application.routes.draw do
   delete "/albums/:album_id/unfavorite" => "albums#unfavorite", as: "unfavorite_album"
 
   post "/zip/update" => "zip#update", as: 'zip_edit'
+
+  match '/404', to: 'errors#file_not_found', via: :all
+  match '/422', to: 'errors#unprocessable', via: :all
+  match '/500', to: 'errors#internal_server_error', via: :all
+
+  get 'errors/file_not_found'
+  get 'errors/unprocessable'
+  get 'errors/internal_server_error'
 
 end
