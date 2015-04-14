@@ -834,7 +834,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 } 
 
 .signup {
-  background: url(../img/grid_noise.png) repeat;
+  background: url(/assets/grid_noise.png) repeat;
   background-color: #ebebeb;
   padding: 40px;
   margin-top: 22px;
