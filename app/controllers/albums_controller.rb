@@ -26,7 +26,6 @@ class AlbumsController < ApplicationController
 
   def add_concert
     Calendar.new.add_concert current_user, params["format"]
-    redirect_to :back
   end
 
   def concert

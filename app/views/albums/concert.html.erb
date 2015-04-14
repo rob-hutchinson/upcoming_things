@@ -65,7 +65,7 @@
               <br>
               <br>
               <% y = [x["title"], x["venue_name"], x["start_time"]] %>
-              <%= form_tag add_concert_path(y), method: :post %><button class="btn-main add-concert" data-id=<% x["title"] %> data-action="add"><i class="fa fa-calendar"></i>  Add to Google Calendar
+              <%= form_tag add_concert_path(y), method: :post, remote: true %><button class="btn-main add-concert"><i class="fa fa-calendar"></i>  Add to Google Calendar
               </button></form>
             </article>
             <% end %>
