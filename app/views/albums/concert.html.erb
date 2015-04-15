@@ -51,7 +51,7 @@
     <section id="content2" class="section">
       <div class="container text-center">          
           
-        <div class="row margin-40" id="albums_list">
+        <div class="row margin-40">
 
       <!--Blog Post-->
       <% unless @concerts.nil? %>
@@ -67,7 +67,7 @@
               <br>
               <br>
               <% y = [x["title"], x["venue_name"], x["start_time"]] %>
-              <%= form_tag add_concert_path(y), method: :post, remote: true %><button class="btn-main add-concert"><i class="fa fa-calendar"></i>  Add to Google Calendar
+              <%= form_tag add_concert_path(y), method: :post, remote: true %><button class="btn-main add-concert"><i class="fa fa-calendar"></i>  Add to Calendar
               </button></form>
             </div>
             </div>
