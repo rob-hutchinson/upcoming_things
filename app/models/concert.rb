@@ -28,7 +28,8 @@ class Concert
             end
           end
         end
-    rescue
+    rescue => e
+      Rails.logger.info e.message
     end 
     concerts
   end
