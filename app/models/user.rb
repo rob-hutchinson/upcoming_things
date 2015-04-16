@@ -35,10 +35,12 @@ class User < ActiveRecord::Base
     matching_user = find_match
     recommendations = []
     
-    Favorite.find_each do |x|
-      if matching_user.favorites.include?(x) && self.favorites
-        .exclude?(Favorite.find_by(album_id: x.album_id, user_id: self.id))
-        recommendations << x
+    unless self.favorites.empty?
+      Favorite.find_each do |x|
+        if matching_user.favorites.include?(x) && self.favorites
+          .exclude?(Favorite.find_by(album_id: x.album_id, user_id: self.id))
+          recommendations << x
+        end
       end
     end
 

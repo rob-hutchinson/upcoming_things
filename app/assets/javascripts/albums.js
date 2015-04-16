@@ -1,6 +1,6 @@
 
 $(function() {
-  $("#favorite-album-table button").click(function(e) {
+  $("#albums_list button").click(function(e) {
     e.preventDefault();
     var $this = $(this);
 
@@ -9,7 +9,7 @@ $(function() {
       $.ajax("/albums/" + $this.data('id') + "/favorite", {
         method: "POST",
         success: function() {
-          $that.removeClass("btn-default").addClass("btn-danger")
+          $that.removeClass("btn-success").addClass("btn-danger")
           .text("Unfollow").data("action", "unfavorite");
         },
         error: function() { alert("ERROR...ERROR"); }
@@ -19,7 +19,7 @@ $(function() {
       $.ajax("/albums/" + $this.data('id') + "/unfavorite", {
         method: "DELETE",
         success: function() {
-          $that.removeClass("btn-danger").addClass("btn-default")
+          $that.removeClass("btn-danger").addClass("btn-success")
           .text("Follow").data("action", "favorite");
         },
         error: function() { alert("ERROR...ERROR"); }

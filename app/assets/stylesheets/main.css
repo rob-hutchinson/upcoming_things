@@ -48,6 +48,10 @@ h4 {
   font-weight: bold;
 }
 
+h5 {
+  font-weight: bold;
+}
+
 p {
   font-size: 16px;
   line-height: 24px;
@@ -106,7 +110,7 @@ a:hover {
             background-image:"http://i.stack.imgur.com/2OrtT.jpg";
             background-repeat: no-repeat;
             background-position: 50% 50%;
-            float:left;
+            float:top;
         }
 
 
@@ -115,12 +119,12 @@ a:hover {
 }
 
 ::selection {
-	background: #ff755a; /* Safari */
-	color: #FFFFFF;
+  background: #ff755a; /* Safari */
+  color: #FFFFFF;
 }
 ::-moz-selection {
-	background: #ff755a; /* Firefox */
-	color: #FFFFFF;
+  background: #ff755a; /* Firefox */
+  color: #FFFFFF;
 }
 
 /*-----------Margins-----------------*/
@@ -370,17 +374,17 @@ a:hover {
 }
 
 .one {
-  background: url(http://www.timcarrollart.com/BrokenRecords1.jpg) no-repeat center center;
+  background: url(https://13thflooroffice.files.wordpress.com/2015/01/decemberists.jpg) no-repeat center center;
   background-size: cover;
 }
 
 .two {
-  background: url(https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTJORJKgdbwfvryI8nR0X0S8M_am6HdRwksvVQFwR8dphgacp8N) no-repeat center center;
+  background: url(http://www.timcarrollart.com/BrokenRecords1.jpg) no-repeat center center;
   background-size: cover;
 }
 
 .three {
-  background: url(http://www.cratekings.com/wp-content/uploads/image/september08/jean_shin_sound_wave.jpg) no-repeat center center;
+  background: url(http://dcmusicdownload.com/wp-content/uploads/2015/04/930-Club-19-628x356.jpg) no-repeat center center;
   background-size: cover;
 }
 
@@ -402,17 +406,17 @@ a:hover {
 }
 
 #content1 {
-  background: #ffffff;
+  background: #000000;
   margin-top: 50px;
 }
 
 #content2 {
-  background: url(http://assets.inhabitat.com/wp-content/blogs.dir/1/files/2010/11/vinyl-record-roof.jpg) repeat;
+  background: #000000 repeat;
   background-color: #ebebeb;
 }
 
 #page-title {
-  background: #ffffff;
+  background: #000000;
   margin-top: 50px;
 }
 
@@ -819,7 +823,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
    Sign Up Page styles
    ========================================================================== */
 #signup {
-  background: url(../img/testimonial-bg.jpg) no-repeat;
+  background: url(/assets/testimonial-bg.jpg) no-repeat;
   background-size: cover;
   padding-top: 120px;
   padding-bottom: 120px;
@@ -830,7 +834,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 } 
 
 .signup {
-  background: url(../img/grid_noise.png) repeat;
+  background: url(/assets/grid_noise.png) repeat;
   background-color: #ebebeb;
   padding: 40px;
   margin-top: 22px;
@@ -878,27 +882,27 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 }
 
 ul.social-icons-signup {
-	list-style: none;
-	margin-left: 0px;
+  list-style: none;
+  margin-left: 0px;
 }
 
 ul.social-icons-signup li {
-	display: inline;
-	padding-left: 15px; 
-	padding-right: 15px;
-	line-height: 50px;
+  display: inline;
+  padding-left: 15px; 
+  padding-right: 15px;
+  line-height: 50px;
 }
 
 ul.social-icons-signup li a {
-	color: #dfe5e8;
-	text-decoration: none;
+  color: #dfe5e8;
+  text-decoration: none;
 }
 
 ul.social-icons-signup li a:hover {
-	color: #626c72;
-	bottom: 12px;
-	text-decoration: none;
-	transition: all 0.35s ease-in-out;
+  color: #626c72;
+  bottom: 12px;
+  text-decoration: none;
+  transition: all 0.35s ease-in-out;
 }
 
 
@@ -912,15 +916,15 @@ ul.social-icons-signup li a:hover {
 }
 
 .thumbs {
-	width: 100%;
-	float: left;
-  overflow: hidden;
+  width: 100%;
+  float: left;
+  overflow: visible;
   position: relative;
   margin-bottom: 30px;
 }
 
 .thumbs a {
-	background-color: rgba(255,117,89,0.90);
+  background-color: rgba(255,117,89,0.90);
   bottom: -200px;
   color: white;
   left: 0;
@@ -934,25 +938,25 @@ ul.social-icons-signup li a:hover {
 }
 
 .thumbs a span.title {
-	display: table;
-	width: 100%;
-	height: 90%;
+  display: table;
+  width: 100%;
+  height: 90%;
 }
 
 .thumbs a span.title span {
-	font-family: 'Lato', sans-serif;
-	font-size: 14.5px;
-	line-height: 17px;
-	font-weight: bold;
-	color: #FFFFFF;
-	text-transform: uppercase;
-	vertical-align: middle;
-	display: table-cell;
-	
+  font-family: 'Lato', sans-serif;
+  font-size: 14.5px;
+  line-height: 17px;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  vertical-align: middle;
+  display: table-cell;
+  
 }
 
 .thumbs a:hover {
-	bottom: 0;
+  bottom: 0;
   opacity: 1;
   transition: opacity 0.30s ease-in-out 0s, bottom 0.4s cubic-bezier(0.25, 0.500, 0, 1) 0s;
   -webkit-transition: opacity 0.30s ease-in-out 0s, bottom 0.4s cubic-bezier(0.25, 0.500, 0, 1) 0s;
@@ -1047,7 +1051,7 @@ ul.icons li {
 
 #bottom p a:hover {
   color: #ff755a;
-	text-decoration: none;
+  text-decoration: none;
 }
 
 hr {
@@ -1058,26 +1062,26 @@ hr {
 }
 
 ul.social-icons {
-	list-style: none;
-	margin-left: 0px;
+  list-style: none;
+  margin-left: 0px;
 }
 
 ul.social-icons li {
-	display: inline;
-	margin-right: 25px;
-	line-height: 50px;
+  display: inline;
+  margin-right: 25px;
+  line-height: 50px;
 }
 
 ul.social-icons li a {
-	color: #ff755a;
-	text-decoration: none;
+  color: #ff755a;
+  text-decoration: none;
 }
 
 ul.social-icons li a:hover {
-	color: #ffffff;
-	bottom: 12px;
-	text-decoration: none;
-	transition: all 0.35s ease-in-out;
+  color: #ffffff;
+  bottom: 12px;
+  text-decoration: none;
+  transition: all 0.35s ease-in-out;
 }
 
 #footer {
@@ -1148,7 +1152,7 @@ p.lead {
 .team-container {
   width: 100%;
 }
-	
+
 }
 
 /* Landscape phone to portrait tablet */
@@ -1205,7 +1209,7 @@ p.lead {
 
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 991px) {
-	
+
 }
 
 
@@ -1220,8 +1224,5 @@ p.lead {
 /* Large screens ----------- */
 @media (min-width: 1200px) and (max-width: 3000px) {
 
-}   
-
-
-
+}  
 

@@ -1,10 +1,8 @@
 require "google/api_client"
-# require "figaro" 
-# require "pry"
 
   class Calendar 
 
-    def add_event user, album
+    def add_album user, album
       client = Google::APIClient.new(
         application_name: "Demo Calendar Client",
         application_version: "0.0.1"
@@ -43,7 +41,6 @@ require "google/api_client"
         application_version: "0.0.1"
       )
 
-      # client.authorization = Google::APIClient::ClientSecrets.load.to_authorization
       client.authorization.client_id = Figaro.env.google_client_id
       client.authorization.client_secret = Figaro.env.google_secret
       client.authorization.scope = 'https://www.googleapis.com/auth/calendar'
@@ -58,5 +55,36 @@ require "google/api_client"
      result = client.execute(
             :api_method => calendar.events.delete,
             :parameters => {'calendarId' => 'primary', 'eventId' => "#{event_id}"})
+    end
+
+    def add_concert user, concert_info
+      client = Google::APIClient.new(
+        application_name: "Demo Calendar Client",
+        application_version: "0.0.1"
+      )
+
+      client.authorization.client_id = Figaro.env.google_client_id
+      client.authorization.client_secret = Figaro.env.google_secret
+      client.authorization.scope = 'https://www.googleapis.com/auth/calendar'
+
+      client.authorization.access_token = user.user_token
+      client.authorization.refresh_token = user.user_refresh_token
+      client.authorization.issued_at = Time.at(user.token_refreshes_at - 3600)
+      client.authorization.expires_in = 3600
+      
+      calendar = client.discovered_api('calendar', 'v3')
+      concert_info = concert_info.split("/")
+
+      event = {
+        'summary' => "#{concert_info[0]} Concert At #{concert_info[1]}",
+        'start' => {'date' => "#{Date.parse(concert_info[2])}"},
+        'end' => {'date' => "#{Date.parse(concert_info[2])}"},
+        }
+
+      result = client.execute(
+            :api_method => calendar.events.insert,
+            :parameters => {'calendarId' => 'primary'},
+            :body => JSON.dump(event),
+            :headers => {'Content-Type' => 'application/json'})
     end
   end
