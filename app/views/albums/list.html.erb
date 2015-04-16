@@ -28,6 +28,38 @@
           
         <div class="row margin-40" id="albums_list">
           <% container_date = Date.current %>
+            
+            <% if @recommended %>
+              <div class="col-sm-3">
+                  <div>
+                    <div class="date-container"><%= Date::MONTHNAMES[@recommended.release_date.month] %> 
+                      <span class="day"><%= @recommended.release_date.day %></span>
+                    </div>
+                    <div class="image-container" style="background-image: url(<%= @recommended.thumbnail %>);">
+                    </div>
+                  
+              
+                      <div class="project-title margin-30">
+                        <% unless @recommended.spotify_id.nil? %>
+                          <h5><a href="https://open.spotify.com/artist/<%= @recommended.spotify_id%>", target="_blank"><%= @recommended.artist %></a></h5>
+                        <% else %>
+                          <h5><%= @recommended.artist %></h5>
+                        <% end %>
+                        <h5><%= @recommended.album_title %></h5>
+                        <% if @favorites.include? @recommended.id %>
+                          <%= form_tag unfavorite_album_path(@recommended), method: :delete %>
+                            <button class="btn btn-danger" data-id=<%=@recommended.id%> data-action="unfavorite">Unfollow</button></form>
+                        <% else %>
+                          <%= form_tag favorite_album_path(@recommended), method: :post %>
+                            <button class="btn btn-success" data-id=<%=@recommended.id%> data-action="favorite">Follow</button></form>
+                        <% end %>
+                      </div>
+                  </div>
+                </div>
+                <% end %>
+
+
+
             <% @albums.each do |x| %>
               <% unless x.release_date < Time.now %>
                 <% if x.release_date == container_date %>    

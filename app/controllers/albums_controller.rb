@@ -4,7 +4,8 @@ class AlbumsController < ApplicationController
     @albums = Album.all
     @favorites = current_user.favorites.pluck :album_id
     unless current_user.recommendation.nil?
-      @flash = "Hey, you've got great taste in music! Have you considered giving #{Album.find(current_user.recommendation).artist} a listen?"
+      @recommended = Album.find(current_user.recommendation)
+      @flash = "Hey, you've got great taste in music! Have you considered giving #{@recommended.artist} a listen?"
     end
   end
 
