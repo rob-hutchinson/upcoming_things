@@ -1,4 +1,3 @@
-
 <!--Content-->
     <section id="page-title" class="section">
       <div class="container">
@@ -11,15 +10,16 @@
     </section>
 
     <!--Flash Message-->
+    <% if @flash %>
+    <br>
     <div class="container">
       <div class="flash">
-        <% flash.each do |name, msg| %>
-        <div class="alert alert-<%= flash_class name %>" style="text-align: center">
-          <%= msg %>
+        <div class="alert alert-danger" style="text-align: center">
+          <%= @flash %>
         </div>
-        <% end %>
       </div>
     </div>
+    <% end %>
 
   <section id="signup">
     <div class="container">

@@ -4,8 +4,7 @@ class AlbumsController < ApplicationController
     @albums = Album.all
     @favorites = current_user.favorites.pluck :album_id
     unless current_user.recommendation.nil?
-      flash[:alert] = "Hey, you've got great taste in music! 
-        Have you considered giving #{Album.find(current_user.recommendation).artist} a listen?"
+      @flash = "Hey, you've got great taste in music! Have you considered giving #{Album.find(current_user.recommendation).artist} a listen?"
     end
   end
 
@@ -33,7 +32,8 @@ class AlbumsController < ApplicationController
     artists = faves.map { |x| Album.find(x).artist }
     
     if current_user.zip_code.nil?
-      flash[:alert] = "Please enter your zip code to search for concerts!"
+      # flash[:alert] = "Please enter your zip code to search for concerts!"
+      @flash = "Please enter your zip code to search for concerts!"
       return :ok
     else
       concerts = Concert.new.search artists, current_user.zip_code
@@ -43,7 +43,7 @@ class AlbumsController < ApplicationController
     unless concerts.empty?
       @concerts = concerts
     else
-      flash[:alert] = "No concerts were found for your favorite artists. Sorry!"
+      @flash = "No concerts were found for your favorite artists. Sorry!"
     end
   end
 
