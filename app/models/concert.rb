@@ -1,6 +1,7 @@
 class Concert
 
   def search artists, zipcode
+    Rails.logger.info "artists is #{artists}, zipcode is #{zipcode}"
     concerts = []
     data = []
 
