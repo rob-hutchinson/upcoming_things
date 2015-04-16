@@ -823,7 +823,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
    Sign Up Page styles
    ========================================================================== */
 #signup {
-  background: url(/assets/testimonial-bg.jpg) no-repeat;
+  background: url('<%= asset_path("testimonial-bg.jpg") %>') no-repeat;
   background-size: cover;
   padding-top: 120px;
   padding-bottom: 120px;
@@ -834,7 +834,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
 } 
 
 .signup {
-  background: url(/assets/grid_noise.png) repeat;
+  background: url('<%= asset_path("grid_noise.png") %>') repeat;
   background-color: #ebebeb;
   padding: 40px;
   margin-top: 22px;
