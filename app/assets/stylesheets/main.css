@@ -21,7 +21,7 @@ h1 {
   font-size: 62px;
   line-height: 60px;
   text-transform: uppercase;
-  color: #ffffff;
+  color: #FFFFFF;
   margin: 0;
   text-shadow: 0 1px 1px rgba(0,0,0,.4);
 }
@@ -74,7 +74,7 @@ a:hover {
 }
 
 .btn-main {
-    background: #ff755a repeat scroll 0 0;
+	  background: #ff755a repeat scroll 0 0;
     border: none;
     font-weight: 800;
     border-radius: 2px;
@@ -88,10 +88,10 @@ a:hover {
 }
 
 .btn-main:hover {
-  background: #dc644b repeat scroll 0 0;
-  color: #FFFFFF;
-  text-decoration: none;
-  transition: all 0.35s ease-in-out;
+	background: #dc644b repeat scroll 0 0;
+	color: #FFFFFF;
+	text-decoration: none;
+	transition: all 0.35s ease-in-out;
 }
 
 .more:hover {
@@ -1152,7 +1152,7 @@ p.lead {
 .team-container {
   width: 100%;
 }
-  
+
 }
 
 /* Landscape phone to portrait tablet */
@@ -1209,7 +1209,7 @@ p.lead {
 
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 991px) {
-  
+
 }
 
 
@@ -1225,3 +1225,4 @@ p.lead {
 @media (min-width: 1200px) and (max-width: 3000px) {
 
 }  
+
